@@ -2,14 +2,10 @@ import type { List } from "./types";
 
 function renderList({ title, items, numbered }: List) {
   const o_u = numbered ? "o" : "u";
-  return `
-    <section>
-      <h3 tabindex="1">${title}</h3>
-      <${o_u}l>
-        <li>${items.join("</li> <li>")}</li>
-      </${o_u}l>
-    </section>
-  `;
+  return `<section>
+    <h3 tabindex="1">${title}</h3>
+    <${o_u}l> <li>${items.join("</li> <li>")}</li> </${o_u}l>
+  </section>`;
 }
 
 function renderLists(lists: List[]) {

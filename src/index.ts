@@ -56,14 +56,7 @@ export const profile = onRequest({ cors }, async (req, res) => {
     res.status(404).json({ message: "Not found", username });
     return;
   }
-  const { name } = user;
   const lists = await getLists(username);
-  const html = renderPage(username, name, lists);
+  const html = renderPage(username, user.name, lists);
   res.status(200).send(html);
-  // res.status(200).json({ id });
-  // res.status(200).send(`<!doctype html>
-  // <html>
-  // <head> <meta charset="UTF-8"> <title>PATH: "${path}"</title> </head>
-  // <body> <h1>PATH: "${path}"</h1> <h2>URL: "${url}"</h2> <h3>id: ${id}</h3> </body>
-  // </html>`);
 });
