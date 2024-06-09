@@ -10,8 +10,7 @@ const firestore = getFirestore();
 const usersDB = firestore.collection("users");
 const listsDB = firestore.collection("lists");
 
-const cors = "all-my-favs.web.app";
-// const cors = true;
+const cors = "all-my-favs.web.app"; // true
 
 type User = {
   id: string;
@@ -40,10 +39,8 @@ export const profile = onRequest({ cors }, async (req, res) => {
     res.status(403).send("Forbidden");
     return;
   }
-  const { path, url } = req;
+  const { path } = req;
   log(`path: "${path}"`);
-  log(`url: "${url}"`);
-  log("200 success");
   if (path.length <= 1) {
     log("no username");
     res.redirect("/");
@@ -58,5 +55,6 @@ export const profile = onRequest({ cors }, async (req, res) => {
   }
   const lists = await getLists(username);
   const html = renderPage(username, user.name, lists);
+  log("200 success");
   res.status(200).send(html);
 });
